@@ -15,7 +15,7 @@ provider "aws" {
   region = "us-east-2"
 }
 variable "instance_name" {
-    default = "lund-bastion"
+    default = "bastion"
 }
 
 variable "pvt_key" {}
@@ -32,21 +32,6 @@ resource "aws_instance" "vm" {
     Name = var.instance_name
 
 } 
-provisioner "remote-exec" {
-    inline = ["sudo apt update", "sudo apt install python3 -y", "echo Done!"]
-
-    connection {
-      host        = self.public_ip
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = file(var.pvt_key)
-    }
-  }
-
-provisioner "local-exec" {
-    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ubuntu -i '${self.public_ip},' --private-key ${var.pvt_key} -e 'pub_key=${var.pub_key}' terraform-install.yml"
-  }
-}
 
 resource "aws_security_group" "terraform-sg-1" {
   name        = "terraform-sg-1"
