@@ -8,7 +8,7 @@ terraform {
       source = "nolte/awx"
       version = "0.2.2"
     }
-
+}}
 provider "aws" {
   region = "us-east-2"
 }
