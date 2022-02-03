@@ -18,9 +18,6 @@ variable "instance_name" {
     default = "bastion"
 }
 
-variable "pvt_key" {}
-variable "pub_key" {}
-
 resource "aws_instance" "vm" {
   
   ami           = "ami-0fb653ca2d3203ac1"
