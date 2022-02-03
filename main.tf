@@ -8,8 +8,6 @@ terraform {
       source = "nolte/awx"
       version = "0.2.2"
     }
-  }
-}
 
 provider "aws" {
   region = "us-east-2"
@@ -27,7 +25,7 @@ resource "aws_instance" "vm" {
 
   tags = {
     Name = var.instance_name
-
+  }
 } 
 
 resource "aws_security_group" "terraform-sg-1" {
